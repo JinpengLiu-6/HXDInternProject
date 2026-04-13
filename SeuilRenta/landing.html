@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#f0f1f2",
+                        "secondary-container": "#a0f399",
+                        "on-surface": "#191c1d",
+                        "secondary": "#1b6d24",
+                        "surface-container-high": "#e7e8e9",
+                        "primary-fixed-dim": "#b6c6ef",
+                        "on-primary-fixed-variant": "#364768",
+                        "on-error": "#ffffff",
+                        "tertiary": "#380002",
+                        "surface-container-low": "#f3f4f5",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#930010",
+                        "on-secondary-fixed": "#002204",
+                        "on-surface-variant": "#44474e",
+                        "surface-tint": "#4e5e81",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#5f0006",
+                        "on-primary-container": "#8293b8",
+                        "on-background": "#191c1d",
+                        "error": "#ba1a1a",
+                        "outline": "#75777f",
+                        "secondary-fixed-dim": "#88d982",
+                        "surface-container-highest": "#e1e3e4",
+                        "primary-fixed": "#d8e2ff",
+                        "tertiary-fixed-dim": "#ffb3ac",
+                        "surface-bright": "#f8f9fa",
+                        "on-tertiary-container": "#ff5952",
+                        "primary-container": "#1a2b4b",
+                        "surface": "#f8f9fa",
+                        "inverse-primary": "#b6c6ef",
+                        "surface-container": "#edeeef",
+                        "tertiary-fixed": "#ffdad6",
+                        "on-tertiary-fixed": "#410003",
+                        "secondary-fixed": "#a3f69c",
+                        "background": "#f8f9fa",
+                        "inverse-surface": "#2e3132",
+                        "on-secondary-container": "#217128",
+                        "surface-dim": "#d9dadb",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e1e3e4",
+                        "on-secondary-fixed-variant": "#005312",
+                        "primary": "#031635",
+                        "outline-variant": "#c5c6cf",
+                        "on-primary-fixed": "#081b3a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .editorial-gradient {
+            background: linear-gradient(135deg, #031635 0%, #1a2b4b 100%);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+
+<body class="bg-surface font-body text-on-surface antialiased overflow-x-hidden">
+    <!-- Shared Component: TopAppBar -->
+    <header class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm">
+        <nav class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+            <div class="text-xl font-bold tracking-tighter text-blue-950 dark:text-white font-headline">HXD Expertise
+            </div>
+            <div class="hidden md:flex items-center gap-8 font-manrope text-sm tracking-tight">
+                <a class="text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-300 transition-opacity hover:opacity-80"
+                    href="#">Dashboard</a>
+                <a class="text-blue-900 dark:text-blue-400 font-semibold border-b-2 border-blue-900 dark:border-blue-400 pb-1 transition-opacity hover:opacity-80"
+                    href="#">Calculators</a>
+                <a class="text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-300 transition-opacity hover:opacity-80"
+                    href="#">Insights</a>
+            </div>
+            <button
+                class="editorial-gradient text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 scale-95 active:scale-90 transition-transform">
+                Get Started
+            </button>
+        </nav>
+    </header>
+    <main class="pt-24 pb-12 overflow-hidden">
+        <!-- Hero Section -->
+        <section class="relative min-h-[870px] flex items-center justify-center px-6">
+            <!-- Background Decorative Elements -->
+            <div class="absolute inset-0 z-0">
+                <div class="absolute top-1/4 -left-20 w-96 h-96 bg-primary-fixed opacity-20 blur-[120px] rounded-full">
+                </div>
+                <div
+                    class="absolute bottom-1/4 -right-20 w-[30rem] h-[30rem] bg-secondary-container opacity-10 blur-[150px] rounded-full">
+                </div>
+            </div>
+            <div class="max-w-6xl mx-auto w-full relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <!-- Content Block -->
+                    <div class="lg:col-span-7 space-y-8">
+                        <div
+                            class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant font-label text-xs font-medium tracking-wide">
+                            <span class="material-symbols-outlined text-sm"
+                                style="font-variation-settings: 'FILL' 1;">analytics</span>
+                            Precision Financial Modeling
+                        </div>
+                        <h1
+                            class="font-headline font-extrabold text-5xl lg:text-7xl leading-[1.05] tracking-tighter text-primary">
+                            Know in 3 minutes if your business will lose money
+                        </h1>
+                        <p class="text-xl text-on-surface-variant max-w-xl leading-relaxed font-body">
+                            A simple, data-driven simulator for ambitious entrepreneurs opening their first restaurant.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                            <button
+                                class="editorial-gradient text-on-secondary px-10 py-5 rounded-full text-lg font-semibold shadow-xl hover:opacity-90 transition-all active:scale-95">
+                                Start simulation
+                            </button>
+                            <button
+                                class="bg-surface-container-high text-on-surface px-10 py-5 rounded-full text-lg font-semibold hover:bg-surface-container-highest transition-all">
+                                View Demo
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-6 pt-8 border-t border-outline-variant/15">
+                            <div class="flex -space-x-3">
+                                <img class="w-10 h-10 rounded-full border-2 border-surface"
+                                    data-alt="professional portrait of a restaurant owner with soft warm lighting and blurred bistro background"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC_zcvKfqePkd6aXxomnhmHTc9Irrp_SAJOZzgzvj6M53R36WWcUnHcL0DWigcxlBiuiUfNv8T8Ic9osOO9h-oyluIFiUaNHHZBpmSlStIZJwcQ-Kl3rD_3yWsRs1HVYhxzb4iTOKMUkksL4KwA5_-FYA8L5QIxF8pXcPONt9vJV_Vym-5xju4VKrczc54o-hs4LabsaBudE9M95zpXPzowfSH1az_xo-g6mOxAC-39xRAjtDlmU27YZhGffc7wXMDDgoqWdIw3jM" />
+                                <img class="w-10 h-10 rounded-full border-2 border-surface"
+                                    data-alt="cheerful woman entrepreneur in high-end office setting with soft natural morning light"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-HVDd8J693M8JMwXPV-DiS0gkYCLyPlrUcKZWTCdbijnV3K2zx301sbsWhEIoQxK3002LUbhxJRr9E1vofgkMzaYaVm2Wus4b7RzzGbWHLgS-jlYOAqmzudk_Ftn1QkyP3p4w27OlyQokNy4SzvyOb8ueevkWH7v-QQeyy8eTMuy5ALOgBrWxXINdqWq9Amah19ziujj57zvXD4NjGdkik6v3WqRP29N7RNwD7sq4y5YeYXC-_1hr-f9mNk5jL0sUABZ6DT5a8I0" />
+                                <img class="w-10 h-10 rounded-full border-2 border-surface"
+                                    data-alt="focused male business consultant in modern architectural environment with professional soft lighting"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQGVWv4Mg2KUIUP8iLIe-P3YxXIjWoLA4QRzvLp_unsXNCCdJSbPkRSogWOef1NPvDjE5II9Dh0ONcIijVrAsplqNJmVVXXEN5oNqmBxu7MPssZn4UXA9i75Td9a7_qwuDL3jdkWKRuKXwFeM_UPHLKbqFJNMBYoJp8pVHwTcZ9TQcBf8u0qsw4IDyxEdWV6ffAfPp7MHvaWqLPbp7AqboTtVi5za-oFyMuKiaFYJGrtTqjlGa5DtE6uinjgjR2UFBzA6lOKrLjjo" />
+                            </div>
+                            <p class="text-sm text-on-surface-variant font-medium">
+                                Trusted by <span class="text-primary font-bold">1,200+</span> restaurant founders
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Visual Block (Bento Style Preview) -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="bg-surface-container-low rounded-xl p-4 shadow-2xl relative overflow-hidden">
+                            <!-- Main Visualization Card -->
+                            <div class="bg-surface-container-lowest rounded-lg p-6 shadow-sm mb-4">
+                                <div class="flex justify-between items-end mb-8">
+                                    <div>
+                                        <p
+                                            class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">
+                                            Estimated ROI</p>
+                                        <h3 class="font-headline text-4xl font-extrabold text-secondary">24.8%</h3>
+                                    </div>
+                                    <div class="w-24 h-12 flex items-end gap-1">
+                                        <div class="flex-1 bg-surface-container-highest rounded-t-sm h-1/2"></div>
+                                        <div class="flex-1 bg-surface-container-highest rounded-t-sm h-3/4"></div>
+                                        <div class="flex-1 bg-secondary rounded-t-sm h-full"></div>
+                                    </div>
+                                </div>
+                                <div class="space-y-6">
+                                    <div>
+                                        <div class="flex justify-between text-xs font-semibold mb-2">
+                                            <span>Monthly Fixed Costs</span>
+                                            <span class="text-primary">$12,400</span>
+                                        </div>
+                                        <div class="h-2 w-full bg-surface-container-highest rounded-full">
+                                            <div class="h-full bg-primary rounded-full w-[65%]"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-xs font-semibold mb-2">
+                                            <span>Break-even Point</span>
+                                            <span class="text-primary">18 Months</span>
+                                        </div>
+                                        <div class="h-2 w-full bg-surface-container-highest rounded-full">
+                                            <div class="h-full bg-primary rounded-full w-[45%]"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Overlapping Accent Card -->
+                            <div
+                                class="absolute -bottom-2 -right-2 glass-panel p-4 rounded-lg shadow-xl border border-white/20 w-48">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-secondary text-lg"
+                                            style="font-variation-settings: 'FILL' 1;">trending_up</span>
+                                    </div>
+                                    <span
+                                        class="text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter leading-tight">Projected<br />Sustainability</span>
+                                </div>
+                                <div class="text-xl font-headline font-bold text-primary">High</div>
+                            </div>
+                        </div>
+                        <!-- Abstract Background Image for Texture -->
+                        <div class="absolute -top-12 -right-12 -z-10 w-64 h-64 opacity-40">
+                            <img class="w-full h-full object-cover rounded-full"
+                                data-alt="abstract flowing glass texture with soft blues and neutral tones with subtle grain and depth"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSW7vRAQW_roxhwYKxlEcZPmtieY-nLrXpX6_Nh9xTVsiEZOuBosrVBRlfmJ23iIzduuUgvusMYToqvADcqPm3IooUH6x6LfCbWKTLyiIe5k9E4Mc7RqBjWWs1LtxB_1D-X7ZKlcsb-6-jJgDBSV1VDMnTBBFwWtTqQ4WbbhehhlPCb3vREBRypLz4iVXpd-N53m9IyLc7t-2stMBzOEbwp9yZJZBopJvSv2TdqmWV5muIAHbY0Dc0Y9QZUGV4glQCEdIGJl6gwdc" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Feature Minimalist Grid -->
+        <section class="max-w-7xl mx-auto px-8 py-24">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+                <div class="space-y-4">
+                    <span class="material-symbols-outlined text-primary text-3xl">restaurant</span>
+                    <h4 class="font-headline font-bold text-xl">Industry Benchmarks</h4>
+                    <p class="text-on-surface-variant leading-relaxed">Leverage data from over 5,000 successful
+                        restaurants to validate your cost assumptions.</p>
+                </div>
+                <div class="space-y-4">
+                    <span class="material-symbols-outlined text-primary text-3xl">insights</span>
+                    <h4 class="font-headline font-bold text-xl">Dynamic Scenarios</h4>
+                    <p class="text-on-surface-variant leading-relaxed">Simulate best and worst-case scenarios for food
+                        costs, labor, and seasonal foot traffic.</p>
+                </div>
+                <div class="space-y-4">
+                    <span class="material-symbols-outlined text-primary text-3xl">account_balance_wallet</span>
+                    <h4 class="font-headline font-bold text-xl">Investor-Ready Reports</h4>
+                    <p class="text-on-surface-variant leading-relaxed">Export professional financial projections that
+                        speak the language of bank lenders and angels.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Shared Component: Footer -->
+    <footer class="w-full py-12 px-8 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+        <div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto gap-4">
+            <div class="font-inter text-xs text-slate-500">© 2024 Venturescape Pro. All rights reserved.</div>
+            <div class="flex gap-8">
+                <a class="font-inter text-xs text-slate-400 hover:text-blue-600 transition-colors" href="#">Privacy
+                    Policy</a>
+                <a class="font-inter text-xs text-slate-400 hover:text-blue-600 transition-colors" href="#">Terms of
+                    Service</a>
+                <a class="font-inter text-xs text-slate-400 hover:text-blue-600 transition-colors" href="#">Contact
+                    Support</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
