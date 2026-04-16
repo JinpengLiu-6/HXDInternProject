@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Node (React)
+node_modules/
+dist/
+.env
+
+# Python (Flask)
+__pycache__/
+*.pyc
+venv/
+
+# IDE
+.vscode/
+.idea/
