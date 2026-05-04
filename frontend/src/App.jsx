@@ -1,120 +1,181 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
+import AppLayout from './components/AppLayout'
+import LandingPage from './pages/LandingPage'
+import LeadFormPage from './pages/LeadFormPage'
+import PromptBuilderPage from './pages/PromptBuilderPage'
+import ResultPage from './pages/ResultPage'
+import SimulatorPage from './pages/SimulatorPage'
+import { getCurrentRoute, getRouteLabel, navigateTo, ROUTES, subscribeToRouteChanges } from './services/routerService'
+import { loadLocale, saveLocale } from './services/storageService'
+import { calculateBreakEvenPoint } from './utils/calculations'
+import { getTranslations } from './utils/translations'
+
+const EMPTY_SIMULATION = {
+  fixedCosts: '',
+  variableCost: '',
+  sellingPrice: '',
+}
+
+const EMPTY_LEAD = {
+  name: '',
+  email: '',
+  phone: '',
+  projectDescription: '',
+}
+
+const EMPTY_PROMPT = {
+  companyType: '',
+  companyStage: '',
+  market: '',
+  questionGoal: 'market-analysis',
+  userQuestion: '',
+  constraints: '',
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [route, setRoute] = useState(getCurrentRoute())
+  const [simulationData, setSimulationData] = useState(EMPTY_SIMULATION)
+  const [result, setResult] = useState(null)
+  const [leadData, setLeadData] = useState(EMPTY_LEAD)
+  const [promptData, setPromptData] = useState(EMPTY_PROMPT)
+  const [locale, setLocale] = useState(loadLocale())
+  const t = getTranslations(locale)
+  const routeRef = useRef(route)
+  const preserveNextRouteRef = useRef(false)
+
+  const resetPageData = () => {
+    setSimulationData(EMPTY_SIMULATION)
+    setLeadData(EMPTY_LEAD)
+    setPromptData(EMPTY_PROMPT)
+    setResult(null)
+  }
+
+  useEffect(() => {
+    const unsubscribe = subscribeToRouteChanges(() => {
+      const nextRoute = getCurrentRoute()
+
+      if (nextRoute !== routeRef.current) {
+        if (!preserveNextRouteRef.current) {
+          resetPageData()
+        }
+
+        preserveNextRouteRef.current = false
+        routeRef.current = nextRoute
+        setRoute(nextRoute)
+      }
+    })
+
+    return unsubscribe
+  }, [])
+
+  useEffect(() => {
+    document.documentElement.lang = t.htmlLang
+    document.title = t.documentTitle
+  }, [t])
+
+  const navigateWithReset = (nextRoute, { preserve = false } = {}) => {
+    preserveNextRouteRef.current = preserve
+
+    if (!preserve) {
+      resetPageData()
+    }
+
+    navigateTo(nextRoute)
+  }
+
+  const handleStart = () => {
+    navigateWithReset(ROUTES.SIMULATOR)
+  }
+
+  const handleOpenPromptBuilder = () => {
+    navigateWithReset(ROUTES.PROMPT_BUILDER)
+  }
+
+  const handleSimulationChange = (nextData) => {
+    setSimulationData(nextData)
+  }
+
+  const handleCalculate = (values) => {
+    const breakEvenPoint = calculateBreakEvenPoint(values)
+    const nextResult = {
+      ...values,
+      breakEvenPoint,
+      generatedAt: new Date().toISOString(),
+    }
+
+    setSimulationData(values)
+    setResult(nextResult)
+    navigateWithReset(ROUTES.RESULT, { preserve: true })
+  }
+
+  const handleLeadChange = (nextData) => {
+    setLeadData(nextData)
+  }
+
+  const handleLeadSubmit = (values) => {
+    setLeadData(values)
+    window.alert(t.alertLeadSaved)
+  }
+
+  const handlePromptChange = (nextData) => {
+    setPromptData(nextData)
+  }
+
+  const handleLocaleChange = (nextLocale) => {
+    resetPageData()
+    setLocale(nextLocale)
+    saveLocale(nextLocale)
+  }
+
+  const renderPage = () => {
+    switch (route) {
+      case ROUTES.LANDING:
+        return <LandingPage onStart={handleStart} onOpenPromptBuilder={handleOpenPromptBuilder} locale={locale} />
+      case ROUTES.SIMULATOR:
+        return (
+          <SimulatorPage
+            initialValues={simulationData}
+            onCalculate={handleCalculate}
+            onChange={handleSimulationChange}
+            locale={locale}
+          />
+        )
+      case ROUTES.PROMPT_BUILDER:
+        return <PromptBuilderPage initialValues={promptData} onChange={handlePromptChange} locale={locale} />
+      case ROUTES.RESULT:
+        return (
+          <ResultPage
+            result={result}
+            onContinue={() => navigateWithReset(ROUTES.LEAD_FORM)}
+            onRecalculate={() => navigateWithReset(ROUTES.SIMULATOR)}
+            locale={locale}
+          />
+        )
+      case ROUTES.LEAD_FORM:
+        return (
+          <LeadFormPage
+            initialValues={leadData}
+            onChange={handleLeadChange}
+            onSubmit={handleLeadSubmit}
+            locale={locale}
+          />
+        )
+      default:
+        return <LandingPage onStart={handleStart} onOpenPromptBuilder={handleOpenPromptBuilder} locale={locale} />
+    }
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    <AppLayout
+      currentRoute={route}
+      currentRouteLabel={getRouteLabel(route, t.routes)}
+      locale={locale}
+      onLocaleChange={handleLocaleChange}
+      onNavigate={navigateWithReset}
+    >
+      {renderPage()}
+    </AppLayout>
   )
 }
 
